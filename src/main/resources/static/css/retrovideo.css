@@ -1,0 +1,27 @@
+nav ul {
+    background-color: #ffdb90;
+    padding: 0.4em 0;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    color: white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+nav li a:hover {
+    color: #ff0014;
+}
+
+.naastMekaar {
+    padding-left: 0;
+}
+.naastMekaar li {
+    display:inline;
+}
