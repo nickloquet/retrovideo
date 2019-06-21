@@ -1,28 +1,27 @@
 package be.vdab.retrovideo.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Reservatie {
-    private final long klantid;
-    private final long filmid;
+    private final int klantid;
+    private final int filmid;
     @DateTimeFormat(style="S-")
-    private final Date reservatie;
+    private final LocalDate reservatie;
 
-    public Reservatie(long klantid, long filmid, Date reservatie) {
+    public Reservatie(int klantid, int filmid, LocalDate reservatie) {
         this.klantid = klantid;
         this.filmid = filmid;
         this.reservatie = reservatie;
     }
 
-    public long getKlantid() {
+    public int getKlantid() {
         return klantid;
     }
-    public long getFilmid() {
+    public int getFilmid() {
         return filmid;
     }
-    public Date getReservatie() {
+    public LocalDate getReservatie() {
         return reservatie;
     }
 }

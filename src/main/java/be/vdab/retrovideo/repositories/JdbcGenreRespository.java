@@ -12,7 +12,7 @@ import java.util.Optional;
 public class JdbcGenreRespository implements GenreRepository{
     private final JdbcTemplate template;
     private final RowMapper<Genre> genreMapper = (result, rowNum) ->
-            new Genre(result.getLong("id"), result.getString("naam"));
+            new Genre(result.getInt("id"), result.getString("naam"));
 
     public JdbcGenreRespository(JdbcTemplate template) {
         this.template = template;
@@ -24,7 +24,7 @@ public class JdbcGenreRespository implements GenreRepository{
         return template.query(sql, genreMapper);
     }
     @Override
-    public Optional<Genre> findById(long id){
+    public Optional<Genre> findById(int id){
         try{
             String sql = "select id, naam from genres where id=?";
             return Optional.of(template.queryForObject(sql, genreMapper, id));

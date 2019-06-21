@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Klanten')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+    <h1>Zoek een klant</h1>
+    <form th:object="${zoekKlantForm}"
+        method="get" th:action="@{/klanten}">
+        <label>Familienaam bevat: <input th:field="*{naam}" autofocus type="text" required></label>
+        <input type="submit" value="Zoeken">
+    </form>
+
+    <table th:if="${klanten}!= null" border="1">
+        <tr>
+        <th>Naam</th>
+        <th>Straat - Huisnummer</th>
+        <th>Postcode</th>
+        <th>Gemeente</th>
+    </tr>
+        <tr th:each="klant:${klanten}" th:object="${klant}">
+            <td><a th:href="@{/reserveren/{klant}(klant=*{id})}" th:text="|*{voornaam} *{familienaam}|"></a></td>
+            <td th:text="*{straatNummer}"></td>
+            <td th:text="*{postcode}"></td>
+            <td th:text="*{gemeente}"></td>
+        </tr>
+    </table>
+</body>
+</html>

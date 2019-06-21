@@ -8,6 +8,6 @@ import java.util.Optional;
 @Repository
 public interface GenreRepository {
     List<Genre> findAll();
-    Optional<Genre> findById(long id);
+    Optional<Genre> findById(int id);
     Optional<Genre> findByNaam(String naam);
 }

@@ -1,14 +1,14 @@
 package be.vdab.retrovideo.domain;
 
 public class Klant {
-    private final long id;
+    private final int id;
     private final String familienaam;
     private final String voornaam;
     private final String straatNummer;
     private final String postcode;
     private final String gemeente;
 
-    public Klant(long id, String familienaam, String voornaam, String straatNummer, String postcode, String gemeente) {
+    public Klant(int id, String familienaam, String voornaam, String straatNummer, String postcode, String gemeente) {
         this.id = id;
         this.familienaam = familienaam;
         this.voornaam = voornaam;
@@ -17,7 +17,7 @@ public class Klant {
         this.gemeente = gemeente;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
     public String getFamilienaam() {

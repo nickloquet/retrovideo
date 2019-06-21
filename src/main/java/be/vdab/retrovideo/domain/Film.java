@@ -3,14 +3,14 @@ package be.vdab.retrovideo.domain;
 import java.math.BigDecimal;
 
 public class Film {
-    private final long id;
-    private final long genreid;
+    private final int id;
+    private final int genreid;
     private final String titel;
     private int voorraad;
     private int gereserveerd;
     private BigDecimal prijs;
 
-    public Film(long id, long genreid, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
+    public Film(int id, int genreid, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
         this.id = id;
         this.genreid = genreid;
         this.titel = titel;
@@ -19,10 +19,10 @@ public class Film {
         this.prijs = prijs;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
-    public long getGenreid() {
+    public int getGenreid() {
         return genreid;
     }
     public String getTitel() {

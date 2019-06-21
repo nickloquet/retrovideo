@@ -5,17 +5,18 @@
 <nav th:replace="fragments::menu"></nav>
     <h1>Genres</h1>
     <ul class="naastMekaar">
-        <li th:each="genre:${genres}">
-            <a th:href="@{/genres/{genre}(genre=${genre.id})}" th:text="${genre.naam}"></a>
+        <li th:each="genre:${genres}" th:object="${genre}">
+            <a th:href="@{{genre}(genre=*{naam})}" th:text="*{naam}"></a>
         </li>
     </ul>
 
-    <h2 th:if="${genre} != null">Gekozen genre: <span th:text="${genre}"></span></h2>
-        <ul>
-            <li th:each="film:${films}">
-                <a th:href="@{/genres/{film}(film=${film})}" th:text="${film}"></a>
-            </li>
-        </ul>
-    </div>
+<h2 th:if="${genre} != null">Gekozen genre: <span th:text="${genre}"></span></h2>
+<ul class="naastMekaar">
+    <li th:each="film:${films}" th:object="${film}">
+        <a th:href="@{film/{film}(film=*{id})}" >
+            <img th:src="@{img/{film}.jpg(film=*{id})}" th:alt="*{titel}">
+        </a>
+    </li>
+</ul>
 </body>
 </html>

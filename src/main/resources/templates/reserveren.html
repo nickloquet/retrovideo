@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Reservatie Bevestigen')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+    <h1>Reservatie Bevestigen</h1>
+    <span th:text="|${aantal} film(s) voor ${klant.voornaam} ${klant.familienaam}|"></span>
+
+    <form>
+        <input type="submit" value="Bevestigen">
+    </form>
+</body>
+</html>
