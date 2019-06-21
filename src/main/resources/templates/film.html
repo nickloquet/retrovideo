@@ -16,7 +16,7 @@
         <dt>Beschikbaar</dt>
         <dd th:text="*{voorraad} - *{gereserveerd}"></dd>
 
-        <form th:if="*{voorraad} != 0" method="post" th:action="@{/mandje}">
+        <form th:if="(*{voorraad} - *{gereserveerd}) != 0" th:action="@{/film/{id}/mandje(id=*{id})}" method="post">
             <input type="submit" value="in mandje">
         </form>
     </div>

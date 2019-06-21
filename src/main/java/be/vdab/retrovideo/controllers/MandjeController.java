@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,9 +33,10 @@ public class MandjeController {
         return modelAndView;
     }
 
-    @PostMapping public String verwijder(List<Integer> ids){
-        for(int id: ids){
-            mandje.remove(id);
+    @PostMapping("/delete")
+    public String verwijder(int[] ids){
+            for(int id: ids){
+                mandje.remove(id);
         }
         return "redirect:/mandje";
     }

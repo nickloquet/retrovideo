@@ -5,23 +5,24 @@
 <nav th:replace="fragments::menu"></nav>
     <h1>Mandje</h1>
     <h3 th:if="${filmsInMandje} == null">Er zit niets in het mandje</h3>
-<form method="post" th:action="@{/mandje}">
-    <table th:if="${filmsInMandje} != null" border="1">
-    <tr>
-        <td>Film</td>
-        <td>Prijs</td>
-        <td><input th:type="submit"  value="Verwijderen"></td>
-    </tr>
-    <tr  th:each="film:${filmsInMandje}">
-        <td th:text="${film.titel}"></td>
-        <td th:text="|&euro; ${film.prijs}|"></td>
-        <td> </td>
-    </tr>
+    <form method="post" th:action="@{/mandje/delete}">
+        <table th:if="${filmsInMandje} != null" border="1">
         <tr>
-            <td>Totaal: </td>
-            <td></td>
+            <td>Film</td>
+            <td>Prijs</td>
+            <td><input th:type="submit" value="Verwijderen"></td>
         </tr>
-    </table>
-</form>
+        <tr  th:each="film:${filmsInMandje}">
+            <td th:text="${film.titel}"></td>
+            <td th:text="|&euro; ${film.prijs}|"></td>
+            <td><input type="checkbox" th:name="id" th:value="${film.id}"></td>
+        </tr>
+            <tr>
+                <td>Totaal: </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+<script th:src="@{/js/preventDoubleSubmit.js}"></script>
 </body>
 </html>
