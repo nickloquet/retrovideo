@@ -4,6 +4,6 @@
 <body>
 <nav th:replace="fragments::menu"></nav>
     <h1>Rapport</h1>
-    <p>De reservatie is OK.</p>
+    <span th:if="${mislukt}==0">De reservatie is OK.</span>
 </body>
 </html>

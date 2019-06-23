@@ -36,21 +36,22 @@ public class ReservatieController {
         ModelAndView modelAndView = new ModelAndView("reserveren");
         modelAndView.addObject("aantal", aantal);
         klantenService.findById(id).ifPresent(klant -> modelAndView.addObject("klant", klant));
-        reservatie(id);
         return modelAndView;
     }
 
     public void reservatie(int klantid){
         for(int filmId : mandje.getIds()){
             Reservatie reservatie = new Reservatie(klantid, filmId, LocalDate.now());
-            //nog controle of voorraad > gereserveerd
             filmService.findById(filmId).ifPresent(film -> filmService.update(film));
             reservatieService.create(reservatie);
         }
     }
 
-    @PostMapping
-    public String bevestigd(){
+    @PostMapping("/{id}/bevestig")
+    public String bevestigd(@PathVariable ("id") int id){
+        //nog controle of voorraad > gereserveerd
+        reservatie(id);
+        //else filmid en titel opslagen als 'mislukt'
         return "redirect:/rapport";
     }
 }

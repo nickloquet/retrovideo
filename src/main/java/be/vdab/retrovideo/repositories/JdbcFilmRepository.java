@@ -43,8 +43,8 @@ public class JdbcFilmRepository implements FilmRepository {
 
     @Override
     public void update(Film film){
-        String sql = "update films set voorraad=?, gereserveerd=? where id=?";
-        if(template.update(sql, film.getVoorraad() -1, film.getGereserveerd() +1, film.getId())==0){
+        String sql = "update films set gereserveerd=? where id=?";
+        if(template.update(sql, film.getGereserveerd() +1, film.getId())==0){
             throw new FilmNietGevondenException();
             }
         }

@@ -6,7 +6,7 @@
     <h1>Reservatie Bevestigen</h1>
     <span th:text="|${aantal} film(s) voor ${klant.voornaam} ${klant.familienaam}|"></span>
 
-    <form>
+    <form method="post" th:action="@{/reserveren/{id}/bevestig(id=${klant.id})}">
         <input type="submit" value="Bevestigen">
     </form>
 </body>

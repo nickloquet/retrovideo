@@ -22,7 +22,8 @@ public class MandjeController {
         this.filmService = filmService;
     }
 
-    @GetMapping public ModelAndView toonMandje(){
+    @GetMapping
+    public ModelAndView toonMandje(){
         List<Film> films = filmService.findAll();
         ModelAndView modelAndView = new ModelAndView("mandje").addObject("films", films);
         if(mandje.isGevuld()){
@@ -34,9 +35,9 @@ public class MandjeController {
     }
 
     @PostMapping("/delete")
-    public String verwijder(int[] ids){
-            for(int id: ids){
-                mandje.remove(id);
+    public String verwijder(int[] ids) {
+        for (int id : ids) {
+            mandje.remove(id);
         }
         return "redirect:/mandje";
     }

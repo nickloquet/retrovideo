@@ -25,5 +25,7 @@ public class DefaultFilmService implements FilmService{
     @Override public List<Film> findByGenre(int genreid){
         return filmRepository.findByGenre(genreid);
     }
-    @Override public void update(Film film){ filmRepository.update(film);}
+    @Override
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+    public void update(Film film){ filmRepository.update(film);}
 }
