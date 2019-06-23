@@ -1,13 +1,17 @@
 package be.vdab.retrovideo.controllers;
 
 import be.vdab.retrovideo.domain.Film;
+import be.vdab.retrovideo.domain.FilmsTeVerwijderen;
 import be.vdab.retrovideo.services.FilmService;
 import be.vdab.retrovideo.sessions.Mandje;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,10 +39,11 @@ public class MandjeController {
     }
 
     @PostMapping("/delete")
-    public String verwijder(int[] ids) {
-        for (int id : ids) {
-            mandje.remove(id);
-        }
+    public String verwijder(FilmsTeVerwijderen ids) {
+
+        //for (int id : ids) {
+        //    mandje.remove(id);
+        //}
         return "redirect:/mandje";
     }
 }
