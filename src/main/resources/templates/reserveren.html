@@ -9,5 +9,6 @@
     <form method="post" th:action="@{/reserveren/{id}/bevestig(id=${klant.id})}">
         <input type="submit" value="Bevestigen">
     </form>
+<script th:src="@{/js/preventDoubleSubmit.js}"></script>
 </body>
 </html>

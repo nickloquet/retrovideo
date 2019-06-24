@@ -15,7 +15,7 @@
         <tr th:each="film:${filmsInMandje}">
             <td th:text="${film.titel}"></td>
             <td th:text="|&euro; ${film.prijs}|"></td>
-            <td><input type="checkbox" th:name="ids[]" th:value="${film.id}"></td>
+            <td><input type="checkbox" th:name="ids" th:value="${film.id}"></td>
         </tr>
             <tr>
                 <td>Totaal: </td>

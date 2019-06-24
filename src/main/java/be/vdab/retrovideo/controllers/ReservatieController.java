@@ -1,5 +1,6 @@
 package be.vdab.retrovideo.controllers;
 
+import be.vdab.retrovideo.domain.Film;
 import be.vdab.retrovideo.domain.Klant;
 import be.vdab.retrovideo.domain.Reservatie;
 import be.vdab.retrovideo.services.FilmService;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -31,7 +35,7 @@ public class ReservatieController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView bevestigen(@PathVariable("id") int id){
+    public ModelAndView bevestigen(@PathVariable("id") int id) {
         int aantal = mandje.getIds().size();
         ModelAndView modelAndView = new ModelAndView("reserveren");
         modelAndView.addObject("aantal", aantal);
@@ -39,19 +43,30 @@ public class ReservatieController {
         return modelAndView;
     }
 
-    public void reservatie(int klantid){
-        for(int filmId : mandje.getIds()){
-            Reservatie reservatie = new Reservatie(klantid, filmId, LocalDate.now());
-            filmService.findById(filmId).ifPresent(film -> filmService.update(film));
-            reservatieService.create(reservatie);
+    public List<Film> reservatie(int klantid) {
+        List<Film> films = new ArrayList<>();
+        for (int filmId : mandje.getIds()) {
+            Film film = filmService.findById(filmId).get();
+            if (film.getVoorraad() >= film.getGereserveerd()) {
+                Reservatie reservatie = new Reservatie(klantid, filmId, LocalDateTime.now());
+                filmService.findById(filmId).ifPresent(filmpje -> filmService.update(filmpje));
+                reservatieService.create(reservatie);
+            } else {
+                filmService.findById(filmId).ifPresent(filmpje -> films.add(filmpje));
+            }
+            return films;
         }
+        return Collections.emptyList();
     }
 
     @PostMapping("/{id}/bevestig")
-    public String bevestigd(@PathVariable ("id") int id){
-        //nog controle of voorraad > gereserveerd
-        reservatie(id);
-        //else filmid en titel opslagen als 'mislukt'
-        return "redirect:/rapport";
+    public String bevestigd(@PathVariable("id") int id) {
+        return "redirect:/reserveren/{id}/rapport";
+    }
+    @GetMapping("/{id}/rapport")
+    public ModelAndView rapport(@PathVariable("id") int id){
+        List<Film> films = reservatie(id);
+        ModelAndView modelAndView =  new ModelAndView("rapport","mislukt", films);
+        return modelAndView;
     }
 }
